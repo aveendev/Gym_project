@@ -29,6 +29,8 @@ class Playar(models.Model):
         ('private','Private'),
     ]
     full_name = models.CharField(max_length=100, null=False, blank=False)
+    father_name = models.CharField(max_length=100, null=False, blank=False)
+    mother_name = models.CharField(max_length=100, null=False, blank=False)
     birth_date = models.DateField()
     phone_number = models.CharField(max_length=10 , null=False,blank=False)
     sport_type = models.CharField(max_length=20, choices=sports_choices,null=False,blank=False)
