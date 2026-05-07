@@ -23,4 +23,6 @@ urlpatterns = [
     path('gym/',include('gym_core.urls')),
     path('api/schema/',SpectacularAPIView.as_view() , name='schema'),
     path('api/docs/',SpectacularSwaggerView.as_view(url_name = 'schema'), name='swagger-ui' ),
+    path('api/memberships/',include('memberships.urls')),
+    path('api/training/',include('training.urls')),
 ]

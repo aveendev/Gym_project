@@ -19,7 +19,7 @@ class Coach(models.Model):
     
 
 
-class Playar(models.Model):
+class Player(models.Model):
     sports_choices = [
          ('karate','Karate'),
         ('gymnastics','Gymnastics'),
@@ -36,7 +36,6 @@ class Playar(models.Model):
     sport_type = models.CharField(max_length=20, choices=sports_choices,null=False,blank=False)
     training_type = models.CharField(max_length=20,choices=training_type_choices,default='group')
     weight = models.DecimalField(max_digits=5,decimal_places=2,null=False,blank=False )
-
     coach = models.ForeignKey(Coach,on_delete=models.PROTECT,related_name='players')
 
     def __str__(self):

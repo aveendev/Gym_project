@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'gym_core.apps.GymCoreConfig',
     'drf_spectacular',
+    'memberships.apps.MembershipsConfig',
+    'training.apps.TrainingConfig',
+
 ]
 
 MIDDLEWARE = [
