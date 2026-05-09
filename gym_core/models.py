@@ -18,7 +18,6 @@ class Coach(models.Model):
         return f"{self.full_name} "
     
 
-
 class Player(models.Model):
     sports_choices = [
          ('karate','Karate'),
