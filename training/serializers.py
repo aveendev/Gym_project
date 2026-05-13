@@ -26,3 +26,4 @@ class EquipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipment
         fields = ['id', 'name', 'quantity', 'price', 'last_updated']
+        

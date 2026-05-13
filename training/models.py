@@ -1,6 +1,5 @@
 from django.db import models
 from gym_core.models import Player, Coach
-
 class Schedule(models.Model):
     DAYS_OF_WEEK = [
         ('SAT', 'السبت'),
@@ -21,17 +20,18 @@ class Schedule(models.Model):
     coach = models.ForeignKey('gym_core.Coach', on_delete=models.SET_NULL,null=True, blank=True)
     players = models.ManyToManyField('gym_core.Player', blank=True )
     coach_attendance = models.CharField(max_length=20, choices=ATTENDANCE_STATUS, null=True, blank=True)
+
     def __str__ (self):
         day_name = self.get_day_display() if self.day else "يوم غير محدد"
         time_str = self.start_time.strftime('%I:%M %p') if self.start_time else "--:--"
         return f"موعد الحصة: {day_name} ({time_str})"
     
-
 class Equipment(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="اسم المعدة ",null=False, blank=False)
     quantity = models.PositiveIntegerField(default=0, verbose_name="الكمية المتوفرة ",null=False, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="السعر ",null=False, blank=False)
     last_updated = models.DateTimeField(auto_now=True, verbose_name="آخر تحديث ")
+    
     def __str__ (self):
         return f"{self.name} - (الكمية: {self.quantity})"
 

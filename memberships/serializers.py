@@ -10,7 +10,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         model = Subscription
         fields = [
             'id', 
-            'player', 
+            'player',
             'player_name', 
             'training_display', 
             'start_date', 
