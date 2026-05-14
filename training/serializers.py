@@ -19,7 +19,6 @@ class ScheduleSerializer(serializers.ModelSerializer):
             'player_names', 
             'coach', 
             'coach_name',
-            'coach_attendance',
         ]
 
 class EquipmentSerializer(serializers.ModelSerializer):
