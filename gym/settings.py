@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'gym_core.apps.GymCoreConfig',
     'users.apps.UsersConfig',
     'drf_spectacular',
+    'memberships.apps.MembershipsConfig',
+    'training.apps.TrainingConfig',
+    'django_filters',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
 ]
@@ -128,7 +131,7 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
-REST_FRAMEWORK ={
+REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework_simplejwt.authentication.JWTAuthentication'],
     'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticated',],
@@ -145,4 +148,9 @@ SIMPLE_JWT = {
     'ALGORITHM':'HS256',
     'SIGNING_KEY':SECRET_KEY,
     'AUTH_HEADER_TYPES':('Bearer',),
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
 }

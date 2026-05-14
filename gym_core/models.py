@@ -32,7 +32,6 @@ class Player(models.Model):
     phone_number = models.CharField(max_length=10 , null=False,blank=False)
     training_type = models.CharField(max_length=20,choices=training_type_choices,default='group')
     weight = models.DecimalField(max_digits=5,decimal_places=2,null=False,blank=False )
-
     coach = models.ForeignKey(Coach,on_delete=models.PROTECT,related_name='players')
 
     def __str__(self):
