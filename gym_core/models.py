@@ -19,11 +19,8 @@ class Coach(models.Model):
     
 
 
-class Playar(models.Model):
-    sports_choices = [
-         ('karate','Karate'),
-        ('gymnastics','Gymnastics'),
-    ]
+class Player(models.Model):
+   
     training_type_choices = [
         ('group','Group'),
         ('private','Private'),
@@ -33,7 +30,6 @@ class Playar(models.Model):
     mother_name = models.CharField(max_length=100, null=False, blank=False)
     birth_date = models.DateField()
     phone_number = models.CharField(max_length=10 , null=False,blank=False)
-    sport_type = models.CharField(max_length=20, choices=sports_choices,null=False,blank=False)
     training_type = models.CharField(max_length=20,choices=training_type_choices,default='group')
     weight = models.DecimalField(max_digits=5,decimal_places=2,null=False,blank=False )
 

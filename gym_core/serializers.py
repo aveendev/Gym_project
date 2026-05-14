@@ -1,15 +1,24 @@
 
 
 from rest_framework import serializers
-from .models import Coach,Playar
+from .models import Coach,Player
 
 class CoachSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coach
-        fieldes = '__all__'
+        fields = '__all__'
 
 
 class PlayerSerializer(serializers.ModelSerializer):
+    coach_name = serializers.ReadOnlyField(source = 'coach.full_name')
     class Meta:
-        model = Playar
-        fieldes = '__all__'
+        model = Player
+        fields =[ 'full_name',
+            'father_name',
+            'mother_name',
+            'birth_date',
+            'phone_number',
+            'sport_type',
+            'training_type',
+            'weight',
+            'coach_name']
