@@ -10,6 +10,15 @@ class CoachSerializer(serializers.ModelSerializer):
 
 
 class PlayerSerializer(serializers.ModelSerializer):
+    coach_name = serializers.ReadOnlyField(source = 'coach.full_name')
     class Meta:
         model = Player
-        fields = '__all__'
+        fields =[ 'full_name',
+            'father_name',
+            'mother_name',
+            'birth_date',
+            'phone_number',
+            'sport_type',
+            'training_type',
+            'weight',
+            'coach_name']

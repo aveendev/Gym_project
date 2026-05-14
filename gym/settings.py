@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from math import fabs
 from pathlib import Path
+import os
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,15 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'gym_core.apps.GymCoreConfig',
+    'users.apps.UsersConfig',
     'drf_spectacular',
     'memberships.apps.MembershipsConfig',
     'training.apps.TrainingConfig',
     'django_filters',
-
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,8 +129,25 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework_simplejwt.authentication.JWTAuthentication'],
+    'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticated',],
+}
+AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME':timedelta(days=365),
+    'REFRESH_TOKEN_LIFETIME':timedelta(days=365),
+    'ROTATE_REFRESH_TOKENS':False,
+    'BLACKLIST_AFTER_ROTATION':False,
+    'ALGORITHM':'HS256',
+    'SIGNING_KEY':SECRET_KEY,
+    'AUTH_HEADER_TYPES':('Bearer',),
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
