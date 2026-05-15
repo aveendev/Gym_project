@@ -29,7 +29,7 @@ os.environ.get('SECRET_KEY ', 'django-insecure-local-develpoment-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -146,7 +146,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS':False,
     'BLACKLIST_AFTER_ROTATION':False,
     'ALGORITHM':'HS256',
-    'SIGNING_KEY':SECRET_KEY,
+    'SIGNING_KEY': 'django-insecure-local-development-key',
     'AUTH_HEADER_TYPES':('Bearer',),
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
