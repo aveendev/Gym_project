@@ -1,5 +1,5 @@
 from django.db import models
-from gym_core.models import Player, Coach
+# from gym_core.models import Player, Coach
 class Schedule(models.Model):
     DAYS_OF_WEEK = [
         ('SAT', 'السبت'),
@@ -13,8 +13,8 @@ class Schedule(models.Model):
     day = models.CharField(max_length=20, choices=DAYS_OF_WEEK, null=False, blank=False)
     start_time = models.TimeField(null=False, blank=False)
     end_time = models.TimeField(null=False, blank=False)
-    coach = models.ForeignKey('gym_core.Coach', on_delete=models.SET_NULL,null=True, blank=True)
-    players = models.ManyToManyField('gym_core.Player', blank=True )
+    # coach = models.ForeignKey('gym_core.Coach', on_delete=models.SET_NULL,null=True, blank=True)
+    # players = models.ManyToManyField('gym_core.Player', blank=True )
 
     def __str__ (self):
         day_name = self.get_day_display() if self.day else "يوم غير محدد"

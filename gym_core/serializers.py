@@ -1,18 +1,24 @@
 
 
 from rest_framework import serializers
-from .models import Coach,Player
+from .models import GymnasticsCoach,KarateCoach,GymnasticsPlayer,KaratePlayer
 
-class CoachSerializer(serializers.ModelSerializer):
+class GymnasticsCoachSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Coach
+        model = GymnasticsCoach
+        fields = '__all__'
+
+class KarateCoachSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KarateCoach
         fields = '__all__'
 
 
-class PlayerSerializer(serializers.ModelSerializer):
-    coach_name = serializers.ReadOnlyField(source = 'coach.full_name')
+
+class GymnasticsPlayerSerializer(serializers.ModelSerializer):
+    coach_name = serializers.ReadOnlyField(source = 'gymnastics_coach.full_name')
     class Meta:
-        model = Player
+        model = GymnasticsPlayer
         fields =[ 'full_name',
             'father_name',
             'mother_name',
@@ -20,5 +26,21 @@ class PlayerSerializer(serializers.ModelSerializer):
             'phone_number',
             'training_type',
             'weight',
-            'coach',
-            'coach_name']
+            'gymnastics_coach',
+            'coach_name'
+            ]
+        
+class KaratePlayerSerializer(serializers.ModelSerializer):
+    coach_name = serializers.ReadOnlyField(source = 'karate_coach.full_name')
+    class Meta:
+        model = KaratePlayer
+        fields =[ 'full_name',
+            'father_name',
+            'mother_name',
+            'birth_date',
+            'phone_number',
+            'training_type',
+            'weight',
+            'karate_coach',
+            'coach_name'
+            ]

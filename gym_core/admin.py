@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Coach,Player
+from .models import GymnasticsCoach,KarateCoach,GymnasticsPlayer,KaratePlayer
 # Register your models here.
 
-admin.site.register(Coach)
-admin.site.register(Player)
+admin.site.register(GymnasticsCoach)
+admin.site.register(KarateCoach)
+admin.site.register(GymnasticsPlayer)
+admin.site.register(KaratePlayer)
 
