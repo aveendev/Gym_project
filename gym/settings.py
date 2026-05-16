@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-os.environ.get('SECRET_KEY ', 'django-insecure-local-develpoment-key')
+SECRET_KEY = 'django-insecure-any-random-string-here-key-123'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -146,7 +146,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS':False,
     'BLACKLIST_AFTER_ROTATION':False,
     'ALGORITHM':'HS256',
-    'SIGNING_KEY':SECRET_KEY,
+    'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES':('Bearer',),
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
