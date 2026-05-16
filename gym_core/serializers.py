@@ -18,7 +18,7 @@ class PlayerSerializer(serializers.ModelSerializer):
             'mother_name',
             'birth_date',
             'phone_number',
-            'sport_type',
             'training_type',
             'weight',
+            'coach',
             'coach_name']

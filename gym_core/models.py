@@ -35,6 +35,6 @@ class Player(models.Model):
     coach = models.ForeignKey(Coach,on_delete=models.PROTECT,related_name='players')
 
     def __str__(self):
-        return f"{self.full_name} - {self.sport_type}"
+        return f"{self.full_name}"
     
 
