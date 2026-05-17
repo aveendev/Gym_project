@@ -1,11 +1,14 @@
-from urllib.request import Request
+
+
+from multiprocessing import context
 
 from rest_framework import status,generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny,IsAuthenticated
-from .serializers import ChangePasswordSerializer, UserSerializer
+from yaml import serializer
+from .serializers import ChangePasswordSerializer, UserSerializer,AddManagerSerializer
 
 
 # Create your views here.
@@ -46,3 +49,15 @@ class ChangePassword(generics.UpdateAPIView):
             self.request.user.save()
             return Response({"detail":"Password changed successfully"},status=status.HTTP_200_OK)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+#اضافة مدير مساعد
+class AddSubManagerView(generics.CreateAPIView):
+    serializer_class = AddManagerSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data,context = {'request':request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message":"Sub_manager added successfully "},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)

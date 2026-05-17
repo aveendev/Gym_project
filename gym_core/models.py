@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-#class Coach(models.Model):
 class Coach(models.Model):
     level_choices = [
         ('a','A'),
@@ -13,6 +12,7 @@ class Coach(models.Model):
     full_name = models.CharField(max_length=100, null=False, blank=False)
     phone_number = models.CharField(max_length=10 , null=False,blank=False)
     training_level = models.CharField(max_length=20,choices=level_choices,null=False,blank=False)
+    gym = models.ForeignKey('club.Gym',on_delete=models.CASCADE,related_name='%(app_label)s_%(class)s_coaches',null=True,blank=True)
 
     class Meta:
         abstract= True
@@ -40,6 +40,7 @@ class Player(models.Model):
     phone_number = models.CharField(max_length=10 , null=False,blank=False)
     training_type = models.CharField(max_length=20,choices=training_type_choices,default='group')
     weight = models.DecimalField(max_digits=5,decimal_places=2,null=False,blank=False )
+    gym = models.ForeignKey('club.Gym',on_delete=models.CASCADE,related_name='%(app_label)s_%(class)s_players',null=True,blank=True)
     
 
     class Meta:

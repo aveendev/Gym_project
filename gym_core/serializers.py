@@ -7,16 +7,19 @@ class GymnasticsCoachSerializer(serializers.ModelSerializer):
     class Meta:
         model = GymnasticsCoach
         fields = '__all__'
+        read_only_fields = ['gym']
 
 class KarateCoachSerializer(serializers.ModelSerializer):
     class Meta:
         model = KarateCoach
         fields = '__all__'
+        read_only_fields = ['gym']
 
 
 
 class GymnasticsPlayerSerializer(serializers.ModelSerializer):
-    coach_name = serializers.ReadOnlyField(source = 'gymnastics_coach.full_name')
+    gymnastics_coach = serializers.SlugRelatedField(slug_field = 'full_name',queryset=GymnasticsCoach.objects.all())
+    
     class Meta:
         model = GymnasticsPlayer
         fields =[ 'full_name',
@@ -26,12 +29,13 @@ class GymnasticsPlayerSerializer(serializers.ModelSerializer):
             'phone_number',
             'training_type',
             'weight',
-            'gymnastics_coach',
-            'coach_name'
+            'gymnastics_coach'
             ]
+        read_only_fields = ['gym']
         
 class KaratePlayerSerializer(serializers.ModelSerializer):
-    coach_name = serializers.ReadOnlyField(source = 'karate_coach.full_name')
+    karate_coach = serializers.SlugRelatedField(slug_field = 'full_name',queryset=KarateCoach.objects.all())
+
     class Meta:
         model = KaratePlayer
         fields =[ 'full_name',
@@ -41,6 +45,6 @@ class KaratePlayerSerializer(serializers.ModelSerializer):
             'phone_number',
             'training_type',
             'weight',
-            'karate_coach',
-            'coach_name'
+            'karate_coach'
             ]
+        read_only_fields = ['gym']
