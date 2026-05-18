@@ -4,24 +4,22 @@ from .models import Subscription
 from .serializers import SubscriptionSerializer
 
 class SubscriptionListCreateView(generics.ListCreateAPIView):
-    queryset = Subscription.objects.select_related('player').all()
     serializer_class = SubscriptionSerializer
-    filterset_fields = ['is_paid', 'player__full_name'] 
-    search_fields = ['^player__full_name']
+    filterset_fields = ['is_paid', 'gymnastics_player', 'karate_player'] 
+    search_fields = ['gymnastics_player__full_name', 'karate_player__full_name']
     ordering_fields = ['is_paid', 'start_date', 'price']
     ordering = ['is_paid'] 
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
-    def get_permissions(self):
-        if self.request.method == 'POST':    
-            return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
-        return [permissions.IsAuthenticated()]
+    def get_queryset(self):
+        return Subscription.objects.filter(gym=self.request.user.gym).select_related('gymnastics_player', 'karate_player')
+    def perform_create(self, serializer):
+        serializer.save(gym=self.request.user.gym)
 
 
 class SubscriptionDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Subscription.objects.select_related('player').all()
     serializer_class = SubscriptionSerializer
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
-    def get_permissions(self):
-        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
-            return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
-        return [permissions.IsAuthenticated()]
+    def get_queryset(self):
+        return Subscription.objects.filter( gym=self.request.user.gym).select_related('gymnastics_player', 'karate_player')
