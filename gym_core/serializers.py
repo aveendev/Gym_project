@@ -20,7 +20,8 @@ class GymnasticsPlayerSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = GymnasticsPlayer
-        fields =[ 'full_name',
+        fields =[ 'id',
+            'full_name',
             'father_name',
             'mother_name',
             'birth_date',
@@ -36,7 +37,8 @@ class KaratePlayerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = KaratePlayer
-        fields =[ 'full_name',
+        fields =[ 'id',
+            'full_name',
             'father_name',
             'mother_name',
             'birth_date',
