@@ -5,8 +5,8 @@ from .serializers import SubscriptionSerializer
 
 class SubscriptionListCreateView(generics.ListCreateAPIView):
     serializer_class = SubscriptionSerializer
-    filterset_fields = ['is_paid', 'gymnastics_player', 'karate_player'] 
-    search_fields = ['gymnastics_player__full_name', 'karate_player__full_name']
+    filterset_fields = ['is_paid', 'gymnastics_player__phone_number', 'karate_player__phone_number'] 
+    search_fields = ['gymnastics_player__full_name','karate_player__full_name','karate_player__phone_number','gymnastics_player__phone_number']
     ordering_fields = ['is_paid', 'start_date', 'price']
     ordering = ['is_paid'] 
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
