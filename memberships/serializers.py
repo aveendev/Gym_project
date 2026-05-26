@@ -3,6 +3,8 @@ from .models import Subscription
 from gym_core.models import GymnasticsPlayer,KaratePlayer
 
 class SubscriptionSerializer(serializers.ModelSerializer):
+    gymnastics_player = serializers.SlugRelatedField(slug_field='phone_number',queryset=GymnasticsPlayer.objects.all(), required=False, allow_null=True)
+    karate_player = serializers.SlugRelatedField(slug_field='phone_number', queryset=KaratePlayer.objects.all(), required=False, allow_null=True)
     player_name = serializers.ReadOnlyField(source='active_player.full_name')
     training_display = serializers.ReadOnlyField(source='active_player.get_training_type_display')
 
