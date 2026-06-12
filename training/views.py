@@ -13,7 +13,8 @@ class ScheduleListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
     def get_queryset(self):
-        return Schedule.objects.filter(gym=self.request.user.gym).select_related('gymnastics_coach', 'karate_coach').prefetch_related('gymnastics_players', 'karate_players')
+        return Schedule.objects.filter(gym=self.request.user.gym).select_related(
+            'gymnastics_coach', 'karate_coach').prefetch_related('gymnastics_players', 'karate_players')
     def perform_create(self, serializer):
         serializer.save(gym=self.request.user.gym)
 
@@ -23,7 +24,8 @@ class ScheduleDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
     def get_queryset(self):
-        return Schedule.objects.filter(gym=self.request.user.gym).select_related('gymnastics_coach','karate_coach').prefetch_related('gymnastics_players', 'karate_players')
+        return Schedule.objects.filter(gym=self.request.user.gym).select_related(
+            'gymnastics_coach','karate_coach' ).prefetch_related('gymnastics_players', 'karate_players')
 
 class EquipmentList(generics.ListCreateAPIView):
     serializer_class = EquipmentSerializer

@@ -31,9 +31,10 @@ class ScheduleSerializer(serializers.ModelSerializer):
         gym_c = data.get('gymnastics_coach')
         karate_c = data.get('karate_coach')
         if gym_c and karate_c:
-            raise serializers.ValidationError({"coach": "لا يمكن تعيين مدرب جمباز ومدرب كاراتيه في نفس الحصة، اختر أحدهما فقط"})
+            raise serializers.ValidationError( {"coach": "لا يمكن تعيين مدرب جمباز ومدرب كاراتيه في نفس الحصة"})
+        if not gym_c and not karate_c:
+            raise serializers.ValidationError( {"coach": "يجب تعيين مدرب واحد على الأقل للحصة"} )
         return data
-    
 
 class EquipmentSerializer(serializers.ModelSerializer):
     class Meta:

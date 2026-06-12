@@ -1,5 +1,3 @@
-
-
 from rest_framework import serializers
 from .models import User
 from club.models import Gym
@@ -17,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             gym = Gym.objects.create(name=gym_name)
             user = User.objects.create_user(gym = gym,**validated_data)
             user.is_staff = True
-            user.is_superuser = True
+            #user.is_superuser = True
             user.save()
             return user
     #لتحديث البيانات
@@ -49,5 +47,5 @@ class AddManagerSerializer(serializers.ModelSerializer):
           password = validated_data.pop('password')
           current_user = self.context['request'].user
           gym_of_current_user = current_user.gym
-          user = User.objects.create_user(password=password, gym = gym_of_current_user,is_staff=True,is_superuser=True,**validated_data)
+          user = User.objects.create_user(password=password, gym = gym_of_current_user,is_staff=True,**validated_data)
           return user

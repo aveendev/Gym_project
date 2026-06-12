@@ -27,3 +27,4 @@ class Subscription(models.Model):
         player_name = player.full_name if player else "لاعب غير معروف"
         payment_status = "تم الدفع" if self.is_paid else "لم يتم الدفع"
         return f"{player_name} - {payment_status}"
+    

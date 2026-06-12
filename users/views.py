@@ -22,7 +22,7 @@ class RegisterView(APIView):
     def post (self , request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(is_staff = True, is_superuser = True)
+            serializer.save(is_staff = True)
             return Response({"message":"Account created successfully"},status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
