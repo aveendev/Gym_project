@@ -30,6 +30,7 @@ urlpatterns = [
     path('api/docs/',SpectacularSwaggerView.as_view(url_name = 'schema'), name='swagger-ui' ),
     path('api/',include('memberships.urls')),
     path('api/',include('training.urls')),
-    path('api/club/',include('club.urls'))
+    path('api/club/',include('club.urls')),
+    path('api/',include('quotation.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
