@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, filters  
 from .models import Schedule, Equipment
-from .serializers import ScheduleSerializer, EquipmentSerializer
+from .serializers import *
 from .filters import EquipmentFilter
 
 class ScheduleListCreateView(generics.ListCreateAPIView):
@@ -47,3 +47,10 @@ class EquipmentDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Equipment.objects.filter(gym=self.request.user.gym)
+    
+
+
+class PublicEquipmentList(generics.ListAPIView):
+    queryset = Equipment.objects.all() 
+    serializer_class = PublicEquipmentSerializer
+    permission_classes = [permissions.AllowAny] 

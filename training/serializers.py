@@ -41,3 +41,9 @@ class EquipmentSerializer(serializers.ModelSerializer):
         model = Equipment
         fields = ['id','gym','name', 'quantity', 'price', 'last_updated']
         read_only_fields = ['gym']
+
+
+class PublicEquipmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Equipment
+        fields = ['id', 'name']        
