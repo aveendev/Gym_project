@@ -4,7 +4,6 @@ from .serializers import KaratePlayerSerializer , GymnasticsCoachSerializer,Kara
 from rest_framework import  permissions
 
 
-# viewset for coach
 class GymnasticsCoachViewSet(viewsets.ModelViewSet):
     serializer_class = GymnasticsCoachSerializer
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]

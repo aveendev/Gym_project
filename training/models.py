@@ -1,7 +1,6 @@
 from django.db import models
 from gym_core.models import *
 from django.core.exceptions import ValidationError
-
 class Schedule(models.Model):
     DAYS_OF_WEEK = [
         ('SAT', 'السبت'),
@@ -10,8 +9,7 @@ class Schedule(models.Model):
         ('TUE', 'الثلاثاء'),
         ('WED', 'الأربعاء'),
         ('THU', 'الخميس'),
-        ('FRI', 'الجمعة'),
-    ]
+        ('FRI', 'الجمعة'),]
     day = models.CharField(max_length=20, choices=DAYS_OF_WEEK, null=False, blank=False)
     start_time = models.TimeField(null=False, blank=False)
     end_time = models.TimeField(null=False, blank=False)

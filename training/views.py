@@ -49,7 +49,6 @@ class EquipmentDetail(generics.RetrieveUpdateDestroyAPIView):
         return Equipment.objects.filter(gym=self.request.user.gym)
     
 
-
 class PublicEquipmentList(generics.ListAPIView):
     queryset = Equipment.objects.all() 
     serializer_class = PublicEquipmentSerializer
