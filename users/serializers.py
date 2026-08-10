@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         
         model = User
-        fields = ['username','full_name','email','password','gym_name']
+        fields = ['username','full_name','password','gym_name']
         extra_kwargs = {'password':{'write_only':True}}
     #للتعامل مع البيانات وتشفير كلمة المرور
     def create(self,validated_data):
