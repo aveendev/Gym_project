@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from yaml import serializer
-from .serializers import ChangePasswordSerializer, UserSerializer,AddManagerSerializer
+from .serializers import UserSerializer
 
 
 # Create your views here.
@@ -36,28 +36,28 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
         return self.request.user
     
 #تغيير كلمة المرور
-class ChangePassword(generics.UpdateAPIView):
-    serializer_class= ChangePasswordSerializer
-    permission_classes = [IsAuthenticated]
+# class ChangePassword(generics.UpdateAPIView):
+#     serializer_class= ChangePasswordSerializer
+#     permission_classes = [IsAuthenticated]
 
-    def get_object(self):
-        return self.request.user
-    def update(self, request, *args, **kwargs):
-        serializer =  self.get_serializer(data = request.data)
-        if serializer.is_valid():
-            self.request.user.set_password(serializer.validated_data['new_password'])
-            self.request.user.save()
-            return Response({"detail":"Password changed successfully"},status=status.HTTP_200_OK)
-        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+#     def get_object(self):
+#         return self.request.user
+#     def update(self, request, *args, **kwargs):
+#         serializer =  self.get_serializer(data = request.data)
+#         if serializer.is_valid():
+#             self.request.user.set_password(serializer.validated_data['new_password'])
+#             self.request.user.save()
+#             return Response({"detail":"Password changed successfully"},status=status.HTTP_200_OK)
+#         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
-#اضافة مدير مساعد
-class AddSubManagerView(generics.CreateAPIView):
-    serializer_class = AddManagerSerializer
-    permission_classes = [IsAuthenticated]
+# #اضافة مدير مساعد
+# class AddSubManagerView(generics.CreateAPIView):
+#     serializer_class = AddManagerSerializer
+#     permission_classes = [IsAuthenticated]
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data,context = {'request':request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message":"Sub_manager added successfully "},status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+#     def create(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data,context = {'request':request})
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response({"message":"Sub_manager added successfully "},status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
